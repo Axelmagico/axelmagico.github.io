@@ -278,7 +278,7 @@
         <!-- SECCIÓN FORMULARIO DE CONTACTO -->
         <section id="contacto" class="form-section">
             <div class="container">
-                <h2>¡PIDE TU PRESUPUESTO SIN COMPROMISO!</h2>
+                <h2>¡Pide tu Presupuesto por WhatsApp!</h2>
                 <p>Completa el formulario y serás redirigido a WhatsApp para enviarnos tu solicitud al instante.</p>
                 <form id="contact-form" class="contact-form">
                     <!-- CAMPO ANTI-SPAM (HONEYPOT) -->
@@ -367,7 +367,7 @@
 
             // --- FUNCIÓN PARA GENERAR EL CAPTCHA ---
             function generateCaptcha() {
-                const num1 = Math.floor(Math.random() * 10) + 1; // Números entre 1 y 10
+                const num1 = Math.floor(Math.random() * 10) + 1;
                 const num2 = Math.floor(Math.random() * 10) + 1;
                 num1El.textContent = num1;
                 num2El.textContent = num2;
@@ -393,11 +393,10 @@
 
                 if (isNaN(userAnswer) || userAnswer !== correctAnswer) {
                     alert('La respuesta de la verificación es incorrecta. Por favor, inténtalo de nuevo.');
-                    // Regenerar el CAPTCHA si falla
                     generateCaptcha();
-                    captchaAnswerEl.value = ''; // Limpiar el campo de respuesta
-                    captchaAnswerEl.focus(); // Poner el foco en el campo de respuesta
-                    return; // Detener el envío
+                    captchaAnswerEl.value = '';
+                    captchaAnswerEl.focus();
+                    return;
                 }
 
                 // --- 3. RECOLECCIÓN DE DATOS ---
@@ -422,7 +421,10 @@
 ¡Estoy muy interesado/a! Por favor, contáctenme a la brevedad.
                 `;
 
-                // --- 5. REDIRECCIÓN A WHATSAPP ---
+                // --- 5. REDIRECCIÓN A WHATSAPP BUSINESS ---
+                // Número de teléfono de WhatsApp Business en formato internacional.
+                // Debe incluir el código de país (595 para Paraguay) SIN el signo "+" ni ceros.
+                // Este formato es el estándar para el enlace wa.me y funciona tanto para WhatsApp personal como Business.
                 const phoneNumber = '595961871700';
                 const encodedMessage = encodeURIComponent(message);
                 const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
