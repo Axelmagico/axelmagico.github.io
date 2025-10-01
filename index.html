@@ -17,6 +17,8 @@
             --dark-color: #333;
             --light-color: #f4f4f4;
             --font-family: 'Arial', sans-serif;
+            --success-color: #28a745;
+            --error-color: #dc3545;
         }
 
         body {
@@ -104,6 +106,12 @@
             transform: translateY(-3px);
             background: #fff;
         }
+        
+        .btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+        }
 
         /* --- SECCIÓN SHOW --- */
         .show-features {
@@ -181,8 +189,7 @@
         }
 
         .form-group input,
-        .form-group select,
-        .form-group textarea {
+        .form-group select {
             width: 100%;
             padding: 1rem;
             border: 1px solid #ccc;
@@ -190,6 +197,25 @@
             font-size: 1rem;
             background-color: #fff;
             box-sizing: border-box;
+        }
+        
+        /* Mensajes de estado del formulario */
+        #form-status {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 5px;
+            font-weight: bold;
+            display: none; /* Oculto por defecto */
+        }
+        #form-status.success {
+            background-color: var(--success-color);
+            color: white;
+            display: block;
+        }
+        #form-status.error {
+            background-color: var(--error-color);
+            color: white;
+            display: block;
         }
 
         /* Estilos para el CAPTCHA */
@@ -278,12 +304,12 @@
         <!-- SECCIÓN FORMULARIO DE CONTACTO -->
         <section id="contacto" class="form-section">
             <div class="container">
-                <h2>¡Pide tu Presupuesto por WhatsApp!</h2>
-                <p>Completa el formulario y serás redirigido a WhatsApp para enviarnos tu solicitud al instante.</p>
-                <form id="contact-form" class="contact-form">
-                    <!-- CAMPO ANTI-SPAM (HONEYPOT) -->
-                    <input type="text" id="honeypot" name="honeypot" style="display:none;">
-
+                <h2>¡Pide tu Presupuesto por Correo!</h2>
+                <p>Completa el formulario y recibiras una respuesta automática en tu correo. Nos comunicaremos contigo a la brevedad.</p>
+                
+                <!-- IMPORTANTE: Reemplaza "TU_FORM_ID" con el ID que te dio Formspree -->
+                <form id="contact-form" class="contact-form" action="https://formspree.io/f/TU_FORM_ID" method="POST">
+                    
                     <div class="form-group">
                         <label for="name">Tu Nombre Completo</label>
                         <input type="text" id="name" name="name" required>
@@ -332,17 +358,20 @@
                         </select>
                     </div>
                     
-                    <!-- NUEVO CAMPO CAPTCHA -->
+                    <!-- CAMPO CAPTCHA -->
                     <div class="form-group">
                         <label>Verificación Anti-Spam</label>
                         <div class="captcha-container">
                             <p>¿Cuánto es <span id="num1"></span> + <span id="num2"></span>?</p>
                             <input type="number" id="captcha-answer" placeholder="Respuesta" required>
-                            <input type="hidden" id="captcha-result">
+                            <input type="hidden" id="captcha-result" name="captcha_answer">
                         </div>
                     </div>
 
-                    <button type="submit" class="btn">ENVIAR A WHATSAPP</button>
+                    <button type="submit" class="btn" id="submit-button">ENVIAR SOLICITUD</button>
+                    
+                    <!-- Mensaje de estado -->
+                    <div id="form-status"></div>
                 </form>
             </div>
         </section>
@@ -353,13 +382,15 @@
         <div class="container">
             <p>&copy; 2024 Mago Axel - Todos los derechos reservados.</p>
             <p>Síguenos en <a href="#">Instagram</a> | <a href="#">Facebook</a></p>
-            <p>Contacto directo: <a href="tel:+595961871700">+595 961 871 700</a></p>
+            <p>Contacto directo: <a href="mailto:corporacionweb@gmail.com">corporacionweb@gmail.com</a></p>
         </div>
     </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const contactForm = document.getElementById('contact-form');
+            const submitButton = document.getElementById('submit-button');
+            const statusDiv = document.getElementById('form-status');
             const num1El = document.getElementById('num1');
             const num2El = document.getElementById('num2');
             const captchaResultEl = document.getElementById('captcha-result');
@@ -374,64 +405,62 @@
                 captchaResultEl.value = num1 + num2;
             }
             
-            // Generar el CAPTCHA al cargar la página
             generateCaptcha();
 
             contactForm.addEventListener('submit', function(e) {
-                e.preventDefault();
+                e.preventDefault(); // Prevenir el envío normal del formulario
 
-                // --- 1. VERIFICACIÓN ANTI-SPAM (HONEYPOT) ---
-                const honeypot = document.getElementById('honeypot').value;
-                if (honeypot) {
-                    console.log("Spam detectado. Envío bloqueado.");
-                    return;
-                }
-
-                // --- 2. VERIFICACIÓN DEL CAPTCHA ---
+                // --- VERIFICACIÓN DEL CAPTCHA ---
                 const userAnswer = parseInt(captchaAnswerEl.value, 10);
                 const correctAnswer = parseInt(captchaResultEl.value, 10);
 
                 if (isNaN(userAnswer) || userAnswer !== correctAnswer) {
-                    alert('La respuesta de la verificación es incorrecta. Por favor, inténtalo de nuevo.');
+                    statusDiv.textContent = 'La respuesta de la verificación es incorrecta. Por favor, inténtalo de nuevo.';
+                    statusDiv.className = 'error';
                     generateCaptcha();
                     captchaAnswerEl.value = '';
                     captchaAnswerEl.focus();
                     return;
                 }
 
-                // --- 3. RECOLECCIÓN DE DATOS ---
-                const name = document.getElementById('name').value;
-                const email = document.getElementById('email').value;
-                const phone = document.getElementById('phone').value;
-                const city = document.getElementById('city').value;
-                const date = document.getElementById('date').value;
-                const gift = document.getElementById('gift_promo').value;
+                // --- PREPARAR EL ENVÍO ---
+                const formData = new FormData(contactForm);
+                submitButton.disabled = true;
+                submitButton.textContent = 'Enviando...';
+                statusDiv.className = '';
+                statusDiv.style.display = 'none';
 
-                // --- 4. CONSTRUCCIÓN DEL MENSAJE PARA WHATSAPP ---
-                const message = `
-¡Hola Mago Axel! He recibido su oferta mágica y quiero mi presupuesto.
-
-*Nombre Completo:* ${name}
-*Email:* ${email}
-*Teléfono/WhatsApp:* ${phone}
-*Ciudad del Evento:* ${city}
-*Fecha del Evento:* ${date}
-*Regalo Promocional Elegido:* ${gift}
-
-¡Estoy muy interesado/a! Por favor, contáctenme a la brevedad.
-                `;
-
-                // --- 5. REDIRECCIÓN A WHATSAPP BUSINESS ---
-                // Número de teléfono de WhatsApp Business en formato internacional.
-                // Debe incluir el código de país (595 para Paraguay) SIN el signo "+" ni ceros.
-                // Este formato es el estándar para el enlace wa.me y funciona tanto para WhatsApp personal como Business.
-                const phoneNumber = '595961871700';
-                const encodedMessage = encodeURIComponent(message);
-                const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
-
-                alert('¡Perfecto! Tu verificación es correcta. Hemos preparado tu mensaje en WhatsApp. Serás redirigido para que solo tengas que presionar ENVIAR.');
-                
-                window.open(whatsappUrl, '_blank');
+                // --- ENVIAR A FORMSPREE CON FETCH API ---
+                fetch(contactForm.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        statusDiv.textContent = '¡Gracias! Tu solicitud ha sido enviada correctamente. Revisa tu correo para la confirmación.';
+                        statusDiv.className = 'success';
+                        contactForm.reset(); // Limpiar el formulario
+                        generateCaptcha(); // Generar nuevo captcha
+                    } else {
+                        response.json().then(data => {
+                            statusDiv.textContent = 'Hubo un error al enviar el formulario: ' + data.error;
+                        });
+                        statusDiv.className = 'error';
+                    }
+                })
+                .catch(error => {
+                    statusDiv.textContent = 'Hubo un error de red. Por favor, inténtalo de nuevo más tarde.';
+                    statusDiv.className = 'error';
+                })
+                .finally(() => {
+                    // Restaurar el botón
+                    submitButton.disabled = false;
+                    submitButton.textContent = 'ENVIAR SOLICITUD';
+                    statusDiv.style.display = 'block';
+                });
             });
         });
     </script>
