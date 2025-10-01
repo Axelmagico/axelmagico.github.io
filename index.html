@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oferta Exclusiva: Mago Axel - Cumpleaños Mágicos en Paraguay</title>
+    <style>
+        /* --- ESTILOS GENERALES --- */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --primary-color: #6a11cb;
+            --secondary-color: #2575fc;
+            --accent-color: #fddb92;
+            --dark-color: #333;
+            --light-color: #f4f4f4;
+            --font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-family);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            color: var(--dark-color);
+            background-color: var(--light-color);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            overflow: hidden;
+            padding: 0 2rem;
+        }
+
+        h1, h2, h3 {
+            font-weight: bold;
+            line-height: 1.2;
+        }
+
+        h1 { font-size: 3rem; }
+        h2 { font-size: 2.5rem; text-align: center; margin-bottom: 1rem; }
+        h3 { font-size: 1.5rem; }
+
+        section {
+            padding: 4rem 0;
+        }
+
+        /* --- SECCIÓN HERO --- */
+        .hero {
+            background: linear-gradient(to right, rgba(106, 17, 203, 0.8), rgba(37, 117, 252, 0.8));
+            color: #fff;
+            text-align: center;
+            padding: 6rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://z-cdn-media.chatglm.cn/files/99132994-1bb8-4349-84e4-0232bd8b3431_1.jpg?auth_key=1790782564-8b94c69d326d46348e8e872cdb9a0853-0-db36b45c3fc3ebd47b462fe2a223176f') no-repeat center center/cover;
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem auto;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--accent-color);
+            color: var(--dark-color);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease, background 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            background: #fff;
+        }
+
+        /* --- SECCIÓN SHOW --- */
+        .show-features {
+            background: #fff;
+            text-align: center;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature-item {
+            background: var(--light-color);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        .feature-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-item .icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* --- SECCIÓN DE LA OFERTA --- */
+        .offer-section {
+            background: #fdfdfd;
+            border-top: 2px solid var(--accent-color);
+            border-bottom: 2px solid var(--accent-color);
+            text-align: center;
+        }
+        .offer-section h2 {
+            color: var(--primary-color);
+        }
+        .offer-section p {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* --- SECCIÓN FORMULARIO --- */
+        .form-section {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: #fff;
+            text-align: center;
+        }
+
+        .form-section h2 {
+            color: #fff;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: auto;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+            background-color: #fff;
+            box-sizing: border-box;
+        }
+
+        /* Estilos para el CAPTCHA */
+        .captcha-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .captcha-container p {
+            margin: 0;
+            font-size: 1.2rem;
+            font-weight: bold;
+            background: #fff;
+            color: var(--primary-color);
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            flex-grow: 1;
+            text-align: center;
+        }
+        #captcha-answer {
+            max-width: 120px;
+        }
+
+
+        /* --- FOOTER --- */
+        .footer {
+            background: var(--dark-color);
+            color: #fff;
+            text-align: center;
+            padding: 2rem 0;
+        }
+        .footer a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SECCIÓN HERO -->
+    <header class="hero">
+        <div class="hero-content container">
+            <h1>¿El Cumpleaños de tu Hijo? ¡Inolvidable!</h1>
+            <p>Con Mago Axel, no es una fiesta, es un espectáculo de magia, risas y emoción donde tu hijo es la verdadera estrella.</p>
+            <a href="#contacto" class="btn">¡QUIERO MI OFERTA MÁGICA EXCLUSIVA!</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- SECCIÓN ¿QUÉ INCLUYE EL SHOW? -->
+        <section id="show" class="show-features container">
+            <h2>Un Espectáculo Completo de 90 Minutos</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="icon">🎩</div>
+                    <h3>Magia Interactiva</h3>
+                    <p>Trucos sorprendentes donde los niños son los ayudantes del mago. ¡Todos participan!</p>
+                </div>
+                <div class="feature-item">
+                    <div class="icon">🐥</div>
+                    <h3>Tito Patito Puppet</h3>
+                    <p>Las risas están garantizadas con las aventuras y travesuras de nuestro puppet estrella.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="icon">🎈</div>
+                    <h3>Globoflexia</h3>
+                    <p>Cada invitado se lleva a casa una creación única de globos: espadas, flores, animales y más.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="icon">🐰</div>
+                    <h3>Aparición de Mascota</h3>
+                    <p>El cierre perfecto con la aparición mágica y segura de nuestra adorable mascota.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN DE LA OFERTA -->
+        <section id="oferta" class="offer-section container">
+            <h2>RESERVA AHORA Y RECIBE UN REGALO MÁGICO GRATIS</h2>
+            <p>Por tiempo limitado, al contratar el espectáculo de Mago Axel, elige UNO de estos servicios adicionales sin costo. ¡Sólo tienes que seleccionarlo en el formulario!</p>
+        </section>
+
+        <!-- SECCIÓN FORMULARIO DE CONTACTO -->
+        <section id="contacto" class="form-section">
+            <div class="container">
+                <h2>¡PIDE TU PRESUPUESTO SIN COMPROMISO!</h2>
+                <p>Completa el formulario y serás redirigido a WhatsApp para enviarnos tu solicitud al instante.</p>
+                <form id="contact-form" class="contact-form">
+                    <!-- CAMPO ANTI-SPAM (HONEYPOT) -->
+                    <input type="text" id="honeypot" name="honeypot" style="display:none;">
+
+                    <div class="form-group">
+                        <label for="name">Tu Nombre Completo</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Tu Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Tu Teléfono / WhatsApp</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="city">Ciudad del Evento</label>
+                        <select id="city" name="city" required>
+                            <option value="" disabled selected>Selecciona tu ciudad...</option>
+                            <option value="Asunción">Asunción</option>
+                            <option value="Luque">Luque</option>
+                            <option value="San Lorenzo">San Lorenzo</option>
+                            <option value="Lambaré">Lambaré</option>
+                            <option value="Capiatá">Capiatá</option>
+                            <option value="Itauguá">Itauguá</option>
+                            <option value="Ñemby">Ñemby</option>
+                            <option value="Limpio">Limpio</option>
+                            <option value="Mariano Roque Alonso">Mariano Roque Alonso</option>
+                            <option value="Villa Elisa">Villa Elisa</option>
+                            <option value="Altos">Altos</option>
+                            <option value="Areguá">Areguá</option>
+                            <option value="Itá">Itá</option>
+                            <option value="Ypané">Ypané</option>
+                            <option value="Guarambaré">Guarambaré</option>
+                            <option value="Nueva Italia">Nueva Italia</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="date">Fecha del Evento (Aproximada)</label>
+                        <input type="date" id="date" name="date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="gift_promo">Elige tu Regalo Promocional</label>
+                        <select id="gift_promo" name="gift_promo" required>
+                            <option value="" disabled selected>Elige tu regalo gratis...</option>
+                            <option value="1 Hora de Globoloco">1 Hora de Globoloco</option>
+                            <option value="1 Hora de Pororó">1 Hora de Pororó</option>
+                            <option value="1 Hora de Algodón de Azúcar">1 Hora de Algodón de Azúcar</option>
+                        </select>
+                    </div>
+                    
+                    <!-- NUEVO CAMPO CAPTCHA -->
+                    <div class="form-group">
+                        <label>Verificación Anti-Spam</label>
+                        <div class="captcha-container">
+                            <p>¿Cuánto es <span id="num1"></span> + <span id="num2"></span>?</p>
+                            <input type="number" id="captcha-answer" placeholder="Respuesta" required>
+                            <input type="hidden" id="captcha-result">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn">ENVIAR A WHATSAPP</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Mago Axel - Todos los derechos reservados.</p>
+            <p>Síguenos en <a href="#">Instagram</a> | <a href="#">Facebook</a></p>
+            <p>Contacto directo: <a href="tel:+595961871700">+595 961 871 700</a></p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const contactForm = document.getElementById('contact-form');
+            const num1El = document.getElementById('num1');
+            const num2El = document.getElementById('num2');
+            const captchaResultEl = document.getElementById('captcha-result');
+            const captchaAnswerEl = document.getElementById('captcha-answer');
+
+            // --- FUNCIÓN PARA GENERAR EL CAPTCHA ---
+            function generateCaptcha() {
+                const num1 = Math.floor(Math.random() * 10) + 1; // Números entre 1 y 10
+                const num2 = Math.floor(Math.random() * 10) + 1;
+                num1El.textContent = num1;
+                num2El.textContent = num2;
+                captchaResultEl.value = num1 + num2;
+            }
+            
+            // Generar el CAPTCHA al cargar la página
+            generateCaptcha();
+
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                // --- 1. VERIFICACIÓN ANTI-SPAM (HONEYPOT) ---
+                const honeypot = document.getElementById('honeypot').value;
+                if (honeypot) {
+                    console.log("Spam detectado. Envío bloqueado.");
+                    return;
+                }
+
+                // --- 2. VERIFICACIÓN DEL CAPTCHA ---
+                const userAnswer = parseInt(captchaAnswerEl.value, 10);
+                const correctAnswer = parseInt(captchaResultEl.value, 10);
+
+                if (isNaN(userAnswer) || userAnswer !== correctAnswer) {
+                    alert('La respuesta de la verificación es incorrecta. Por favor, inténtalo de nuevo.');
+                    // Regenerar el CAPTCHA si falla
+                    generateCaptcha();
+                    captchaAnswerEl.value = ''; // Limpiar el campo de respuesta
+                    captchaAnswerEl.focus(); // Poner el foco en el campo de respuesta
+                    return; // Detener el envío
+                }
+
+                // --- 3. RECOLECCIÓN DE DATOS ---
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const phone = document.getElementById('phone').value;
+                const city = document.getElementById('city').value;
+                const date = document.getElementById('date').value;
+                const gift = document.getElementById('gift_promo').value;
+
+                // --- 4. CONSTRUCCIÓN DEL MENSAJE PARA WHATSAPP ---
+                const message = `
+¡Hola Mago Axel! He recibido su oferta mágica y quiero mi presupuesto.
+
+*Nombre Completo:* ${name}
+*Email:* ${email}
+*Teléfono/WhatsApp:* ${phone}
+*Ciudad del Evento:* ${city}
+*Fecha del Evento:* ${date}
+*Regalo Promocional Elegido:* ${gift}
+
+¡Estoy muy interesado/a! Por favor, contáctenme a la brevedad.
+                `;
+
+                // --- 5. REDIRECCIÓN A WHATSAPP ---
+                const phoneNumber = '595961871700';
+                const encodedMessage = encodeURIComponent(message);
+                const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+
+                alert('¡Perfecto! Tu verificación es correcta. Hemos preparado tu mensaje en WhatsApp. Serás redirigido para que solo tengas que presionar ENVIAR.');
+                
+                window.open(whatsappUrl, '_blank');
+            });
+        });
+    </script>
+
+</body>
+</html>
