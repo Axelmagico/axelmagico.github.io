@@ -408,59 +408,25 @@
             generateCaptcha();
 
             contactForm.addEventListener('submit', function(e) {
-                e.preventDefault(); // Prevenir el envío normal del formulario
-
-                // --- VERIFICACIÓN DEL CAPTCHA ---
+                // --- VERIFICACIÓN DEL CAPTCHA ANTES DE ENVIAR ---
                 const userAnswer = parseInt(captchaAnswerEl.value, 10);
                 const correctAnswer = parseInt(captchaResultEl.value, 10);
 
                 if (isNaN(userAnswer) || userAnswer !== correctAnswer) {
+                    e.preventDefault(); // Prevenir el envío del formulario
                     statusDiv.textContent = 'La respuesta de la verificación es incorrecta. Por favor, inténtalo de nuevo.';
                     statusDiv.className = 'error';
+                    statusDiv.style.display = 'block';
                     generateCaptcha();
                     captchaAnswerEl.value = '';
                     captchaAnswerEl.focus();
-                    return;
+                    return; // Detener la ejecución aquí
                 }
 
-                // --- PREPARAR EL ENVÍO ---
-                const formData = new FormData(contactForm);
+                // Si el CAPTCHA es correcto, el formulario se envía de forma normal.
+                // El navegador se encargará del resto.
                 submitButton.disabled = true;
                 submitButton.textContent = 'Enviando...';
-                statusDiv.className = '';
-                statusDiv.style.display = 'none';
-
-                // --- ENVIAR A FORMSPREE CON FETCH API ---
-                fetch(contactForm.action, {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                })
-                .then(response => {
-                    if (response.ok) {
-                        statusDiv.textContent = '¡Gracias! Tu solicitud ha sido enviada correctamente. Revisa tu correo para la confirmación.';
-                        statusDiv.className = 'success';
-                        contactForm.reset(); // Limpiar el formulario
-                        generateCaptcha(); // Generar nuevo captcha
-                    } else {
-                        response.json().then(data => {
-                            statusDiv.textContent = 'Hubo un error al enviar el formulario: ' + data.error;
-                        });
-                        statusDiv.className = 'error';
-                    }
-                })
-                .catch(error => {
-                    statusDiv.textContent = 'Hubo un error de red. Por favor, inténtalo de nuevo más tarde.';
-                    statusDiv.className = 'error';
-                })
-                .finally(() => {
-                    // Restaurar el botón
-                    submitButton.disabled = false;
-                    submitButton.textContent = 'ENVIAR SOLICITUD';
-                    statusDiv.style.display = 'block';
-                });
             });
         });
     </script>
