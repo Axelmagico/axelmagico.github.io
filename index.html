@@ -91,12 +91,14 @@
             gap: 3rem;
         }
 
-        .left-column img {
-            width: 50%;
-            height: 50%;
-            object-fit: cover;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  .left-column img {
+    width: 60%; /* La imagen ahora ocupará el 60% del ancho de su columna */
+    height: auto; /* La altura se ajusta automáticamente para no deformar la imagen */
+    object-fit: cover;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    display: block; /* Convierte la imagen en un bloque para poder centrarla */
+    margin: 0 auto; /* Centra la imagen horizontalmente */
         }
 
         .right-column {
@@ -442,6 +444,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 </body>
 </html>
+
 
 
 
