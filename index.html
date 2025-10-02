@@ -375,72 +375,71 @@
         </div>
     </footer>
 
-    <!-- SCRIPT PARA EL COUNTDOWN Y EL FORMULARIO -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            
-            // --- CONFIGURACIÓN DEL COUNTDOWN ---
-            // CAMBIA ESTA FECHA POR LA FECHA DE TU EVENTO O LÍMITE DE OFERTA
-            const targetDate = new Date("2024-12-31T23:59:59").getTime(); 
+document.addEventListener('DOMContentLoaded', function() {
+    
+    // --- CONFIGURACIÓN DEL COUNTDOWN ---
+    // CAMBIA ESTA FECHA POR LA FECHA DE TU EVENTO O LÍMITE DE OFERTA
+    const targetDate = new Date("2024-12-31T23:59:59").getTime(); 
 
-            const countdownInterval = setInterval(function() {
-                const now = new Date().getTime();
-                const distance = targetDate - now;
+    const countdownInterval = setInterval(function() {
+        const now = new Date().getTime();
+        const distance = targetDate - now;
 
-                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-                document.getElementById("days").innerText = days.toString().padStart(2, '0');
-                document.getElementById("hours").innerText = hours.toString().padStart(2, '0');
-                document.getElementById("minutes").innerText = minutes.toString().padStart(2, '0');
-                document.getElementById("seconds").innerText = seconds.toString().padStart(2, '0');
+        document.getElementById("days").innerText = days.toString().padStart(2, '0');
+        document.getElementById("hours").innerText = hours.toString().padStart(2, '0');
+        document.getElementById("minutes").innerText = minutes.toString().padStart(2, '0');
+        document.getElementById("seconds").innerText = seconds.toString().padStart(2, '0');
 
-                if (distance < 0) {
-                    clearInterval(countdownInterval);
-                    document.getElementById("countdown-timer").innerHTML = "¡La oferta ha finalizado!";
-                }
-            }, 1000);
+        if (distance < 0) {
+            clearInterval(countdownInterval);
+            document.getElementById("countdown-timer").innerHTML = "¡La oferta ha finalizado!";
+        }
+    }, 1000);
 
 
-            // --- SCRIPT DEL FORMULARIO (COMPLETO Y FUNCIONAL) ---
-            const contactForm = document.getElementById('contact-form');
-            const num1El = document.getElementById('num1');
-            const num2El = document.getElementById('num2');
-            const captchaResultEl = document.getElementById('captcha-result');
-            const captchaAnswerEl = document.getElementById('captcha-answer');
+    // --- SCRIPT DEL FORMULARIO (CORREGIDO) ---
+    const contactForm = document.getElementById('contact-form');
+    const num1El = document.getElementById('num1');
+    const num2El = document.getElementById('num2');
+    const captchaResultEl = document.getElementById('captcha-result');
+    const captchaAnswerEl = document.getElementById('captcha-answer');
 
-            function generateCaptcha() {
-                const num1 = Math.floor(Math.random() * 10) + 1;
-                const num2 = Math.floor(Math.random() * 10) + 1;
-                num1El.textContent = num1;
-                num2El.textContent = num2;
-                captchaResultEl.value = num1 + num2;
-            }
-            
+    function generateCaptcha() {
+        const num1 = Math.floor(Math.random() * 10) + 1;
+        const num2 = Math.floor(Math.random() * 10) + 1;
+        num1El.textContent = num1;
+        num2El.textContent = num2;
+        captchaResultEl.value = num1 + num2;
+    }
+    
+    generateCaptcha();
+
+    contactForm.addEventListener('submit', function(e) {
+        // --- VERIFICACIÓN DEL CAPTCHA ANTES DE ENVIAR ---
+        const userAnswer = parseInt(captchaAnswerEl.value, 10);
+        const correctAnswer = parseInt(captchaResultEl.value, 10);
+
+        if (isNaN(userAnswer) || userAnswer !== correctAnswer) {
+            // SI EL CAPTCHA ES INCORRECTO, DETENEMOS EL ENVÍO
+            e.preventDefault(); 
+            alert('La respuesta de la verificación es incorrecta. Por favor, inténtalo de nuevo.');
             generateCaptcha();
+            captchaAnswerEl.value = '';
+            captchaAnswerEl.focus();
+            return; // Detenemos la ejecución aquí
+        }
 
-            contactForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-
-                const userAnswer = parseInt(captchaAnswerEl.value, 10);
-                const correctAnswer = parseInt(captchaResultEl.value, 10);
-
-                if (isNaN(userAnswer) || userAnswer !== correctAnswer) {
-                    alert('La respuesta de la verificación es incorrecta. Por favor, inténtalo de nuevo.');
-                    generateCaptcha();
-                    captchaAnswerEl.value = '';
-                    captchaAnswerEl.focus();
-                    return;
-                }
-
-                // Si el CAPTCHA es correcto, el formulario se envía de forma normal.
-                const submitButton = contactForm.querySelector('button[type="submit"]');
-                submitButton.disabled = true;
-                submitButton.textContent = 'Enviando...';
-            });
-        });
-    </script>
+        // SI EL CAPTCHA ES CORRECTO, NO HACEMOS NADA.
+        // El formulario se enviará de forma normal y el navegador te llevará a la página de agradecimiento de Formspree.
+    });
+});
+</script>
 </body>
 </html>
+
