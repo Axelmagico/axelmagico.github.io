@@ -355,7 +355,15 @@
             }
             
             generateCaptcha();
+// --- NUEVA VALIDACIÓN DE FECHA ---
+const selectedDateValue = document.getElementById('date').value;
+const selectedDate = new Date(selectedDateValue);
+const deadlineDate = new Date("2025-10-31T23:59:59"); // Fin del 31 de Octubre
 
+if (selectedDate > deadlineDate) {
+    alert("La promo es solo hasta el 31 de octubre, por favor escoja una fecha dentro del mes de octubre.");
+    return; // Detiene la ejecución si la fecha es inválida
+}
             // Función para validar y enviar el formulario
             function validateAndSubmitForm() {
                 const userAnswer = parseInt(captchaAnswerEl.value, 10);
@@ -398,6 +406,7 @@
     </script>
 </body>
 </html>
+
 
 
 
