@@ -377,6 +377,12 @@ if (selectedDate > deadlineDate) {
     alert("La promo es solo hasta el 31 de octubre, por favor escoja una fecha dentro del mes de octubre.");
     return; // Detiene la ejecución si la fecha es inválida
 }
+                // 2. NUEVA VALIDACIÓN: Validar que el día sea de lunes a jueves
+const dayOfWeek = selectedDate.getDay(); // 0=Domingo, 1=Lunes, 2=Martes, ..., 5=Viernes, 6=Sábado
+if (dayOfWeek === 0 || dayOfWeek === 5 || dayOfWeek === 6) { // 0=Domingo, 5=Viernes, 6=Sábado
+    alert("La promoción solo es válida de lunes a jueves. Por favor, seleccione un día hábil.");
+    return;
+}
                 // 1. Obtener los datos del formulario
                 const name = document.getElementById('name').value;
                 const phone = document.getElementById('phone').value;
@@ -406,6 +412,7 @@ if (selectedDate > deadlineDate) {
     </script>
 </body>
 </html>
+
 
 
 
