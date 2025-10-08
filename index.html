@@ -235,7 +235,7 @@
         <!-- SECCIÓN DEL TÍTULO PRINCIPAL -->
         <section class="hero-title-section">
             <div class="hero-title-content">
-                <h1>QUIERO CONTRATAR AL MAGO AXEL Y RECIBIR MI REGALO DE PROMOCIÓN</h1>
+                <h1>QUIERO CONTRATAR Y RECIBIR MI REGALO</h1>
             </div>
         </section>
 
@@ -265,7 +265,7 @@
                 <input type="tel" id="phone" name="phone" required>
             </div>
             <div class="form-group">
-                <label for="city">Ciudad del Evento</label>
+                <label for="city">Ciudades que aplica</label>
                 <select id="city" name="city" required>
                     <option value="" disabled selected>Selecciona tu ciudad...</option>
                     <option value="Asunción">Asunción</option>
@@ -273,16 +273,16 @@
                     <option value="San Lorenzo">San Lorenzo</option>
                     <option value="Lambaré">Lambaré</option>
                     <option value="Capiatá">Capiatá</option>
-                    <option value="Itauguá">San Antonio</option>
+                    <option value="Itauguá">Fernando de la Mora</option>
                     <option value="Ñemby">Ñemby</option>
-                    <option value="Limpio">Limpio</option>
+                    <option value="Limpio">Ypané</option>
                     <option value="Mariano Roque Alonso">Loma Pytá</option>
-                    <option value="Villa Elisa">Villa Elisa</option
-                    <option value="Villa Elisa">Ypané</option>
+                    <option value="Villa Elisa">Villa Elisa</option>
+                    <option value="Villa Elisa">San Antonio</option>
                 </select>
             </div>
             <div class="form-group">
-                <label for="date">Fecha del Evento</label>
+                <label for="date">Fecha del Evento (Aproximada)</label>
                 <input type="date" id="date" name="date" required>
             </div>
             <div class="form-group">
@@ -369,8 +369,26 @@
                     return;
                 }
 
-                // Si el CAPTCHA es correcto, envía el formulario
+                // 1. Obtener los datos del formulario
+                const name = document.getElementById('name').value;
+                const phone = document.getElementById('phone').value;
+
+                // 2. Construir el mensaje pre-escrito para WhatsApp
+                const message = `Hola Mago Axel, soy ${name}. Acabo de enviar el formulario desde su web y quiero confirmar mi solicitud. Mi número es ${phone}.`;
+
+                // 3. Construir la URL de WhatsApp
+                const phoneNumber = '595961871700'; // Tu número de WhatsApp Business
+                const encodedMessage = encodeURIComponent(message);
+                const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+
+                // 4. Enviar el formulario a Formspree (para que recibas el email)
                 contactForm.requestSubmit();
+
+                // 5. Mostrar un mensaje de agradecimiento al usuario
+                alert('¡Gracias, ' + name + '! Tu solicitud ha sido recibida. Ahora te abriremos WhatsApp para que confirmes tu mensaje y nos contactes de inmediato.');
+
+                // 6. Abrir WhatsApp en una nueva pestaña
+                window.open(whatsappUrl, '_blank');
             }
 
             // Añadir el evento al botón CTA final
