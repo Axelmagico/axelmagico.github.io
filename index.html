@@ -388,7 +388,8 @@
                 alert('¡Gracias, ' + name + '! Tu solicitud ha sido recibida. Ahora te abriremos WhatsApp para que confirmes tu mensaje y nos contactes de inmediato.');
 
                 // 6. Abrir WhatsApp en una nueva pestaña
-                window.open(whatsappUrl, '_blank');
+                //window.open(whatsappUrl, '_blank');
+                window.location.href = whatsappUrl;
             }
 
             // Añadir el evento al botón CTA final
@@ -397,5 +398,6 @@
     </script>
 </body>
 </html>
+
 
 
