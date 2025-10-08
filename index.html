@@ -3,23 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mago Axel - Espectáculos de Magia Inolvidables</title>
+    <title>Mago Axel - Oferta Exclusiva de Cumpleaños</title>
     
-    <!-- Google Fonts para Tipografía Profesional -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
 
     <style>
         /* --- VARIABLES GLOBALES --- */
         :root {
-            --primary-color: #6a11cb;
-            --secondary-color: #2575fc;
             --accent-color: #fddb92;
-            --dark-color: #1a1a1a;
-            --light-color: #f4f4f4;
-            --text-color: #333;
+            --accent-orange: #ff9f1c;
+            --dark-bg: #000000;
+            --text-white: #ffffff;
+            --text-gray: #cccccc;
             --font-family: 'Poppins', sans-serif;
+            --font-title: 'Bebas Neue', cursive;
         }
 
         /* --- ESTILOS GENERALES --- */
@@ -32,140 +32,106 @@
             margin: 0;
             padding: 0;
             line-height: 1.6;
-            color: var(--text-color);
-            background-color: var(--light-color);
+            color: var(--text-white);
+            background-color: var(--dark-bg);
+            min-height: 100vh;
         }
 
-        .container {
-            max-width: 1200px;
+        .landing-container {
+            max-width: 700px;
             margin: auto;
-            padding: 0 2rem;
-        }
-
-        h1, h2, h3 {
-            font-weight: 700;
-            line-height: 1.2;
-        }
-
-        /* --- SECCIÓN HEADER CON COUNTDOWN --- */
-        .hero-countdown {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: #fff;
+            padding: 2rem;
             text-align: center;
-            padding: 3rem 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 100vh;
+            box-sizing: border-box;
         }
 
-        .hero-countdown h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
+        /* --- SECCIÓN DEL TÍTULO CON FONDO --- */
+        .hero-title-section {
+            position: relative;
+            padding: 4rem 2rem;
+            margin-bottom: 2rem;
+            background-image: url('https://z-cdn-media.chatglm.cn/files/899a290b-84b8-4260-8583-42c9f455dcdb_Show.jpg?auth_key=1790935980-0b5fb345ae31494e97d9e4d3d5bd9b0e-0-c5d86bcaf8471379378f9d2021232fbc');
+            background-size: cover;
+            background-position: center;
+            border-radius: 15px;
+            overflow: hidden;
         }
 
+        .hero-title-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .hero-title-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-title-content h1 {
+            font-family: var(--font-title);
+            font-size: 3.5rem;
+            margin: 0;
+            color: var(--accent-color);
+            text-shadow: 3px 3px 8px rgba(0,0,0,0.7);
+            letter-spacing: 2px;
+            line-height: 1.1;
+        }
+
+        /* --- ESTILOS DEL COUNTDOWN --- */
         #countdown-timer {
             display: flex;
             justify-content: center;
-            gap: 2rem;
-            font-size: 1.2rem;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            font-family: var(--font-title);
         }
 
         .countdown-item {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 1rem 1.5rem;
-            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
             min-width: 80px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .countdown-item span {
             display: block;
-            font-size: 2.5rem;
-            font-weight: 700;
-        }
-
-        /* --- SECCIÓN PRINCIPAL (2 COLUMNAS) --- */
-        .main-content {
-            padding: 4rem 0;
-        }
-
-        .two-columns {
-            display: flex;
-            align-items: stretch; 
-            gap: 3rem;
-        }
-
-  .left-column img {
-    width: 60%; /* La imagen ahora ocupará el 60% del ancho de su columna */
-    height: auto; /* La altura se ajusta automáticamente para no deformar la imagen */
-    object-fit: cover;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    display: block; /* Convierte la imagen en un bloque para poder centrarla */
-    margin: 0 auto; /* Centra la imagen horizontalmente */
-        }
-
-        .right-column {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .feature-row {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            background: #fff;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .feature-row:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-        }
-
-        /* ESTILO PARA LOS EMOJIS ILUSTRATIVOS */
-        .feature-emoji {
-            font-size: 3rem; /* Tamaño grande para que destaque */
-            line-height: 1;
-            min-width: 80px; /* Ancho mínimo para alinear */
-            text-align: center;
-        }
-
-        .feature-row h3 {
-            margin: 0 0 0.5rem 0;
-            color: var(--dark-color);
-        }
-
-        .feature-row p {
-            margin: 0;
-            font-size: 0.95rem;
-        }
-
-        /* --- FOOTER CON FORMULARIO --- */
-        .footer-form {
-            background: var(--dark-color);
-            color: #fff;
-            padding: 4rem 0;
-            text-align: center;
-        }
-
-        .footer-form h2 {
             font-size: 2rem;
-            margin-bottom: 1rem;
+            font-weight: 700;
+            color: var(--accent-color);
         }
 
+        .countdown-item small {
+            font-size: 0.8rem;
+            color: var(--text-gray);
+        }
+
+        /* --- ESTILOS DEL SUBTÍTULO --- */
+        .promo-subtitle {
+            font-size: 1rem;
+            color: var(--text-gray);
+            margin-bottom: 2.5rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* --- ESTILOS DEL FORMULARIO --- */
         .contact-form {
-            max-width: 600px;
-            margin: auto;
             display: flex;
             flex-direction: column;
             gap: 1rem;
-        }
-
-        .form-group {
             text-align: left;
+            margin-bottom: 2.5rem;
         }
 
         .form-group label {
@@ -215,236 +181,200 @@
             border: 1px solid #555;
         }
 
-        .btn-submit {
-            background: var(--accent-color);
-            color: var(--dark-color);
+        /* --- ESTILOS DE LOS BOTONES --- */
+        .btn-submit, .btn-final-cta {
+            background: var(--accent-orange);
+            color: var(--dark-bg);
             padding: 1rem 2rem;
             border-radius: 50px;
             text-decoration: none;
             font-weight: bold;
             font-size: 1.1rem;
-            transition: transform 0.3s ease, background 0.3s ease;
+            font-family: var(--font-family);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             border: none;
             cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        .btn-submit:hover {
+        .btn-submit:hover, .btn-final-cta:hover {
             transform: translateY(-3px);
-            background: #fff;
+            box-shadow: 0 8px 25px rgba(255, 159, 28, 0.4);
+        }
+        
+        .btn-final-cta {
+            font-size: 1.2rem;
+            padding: 1.2rem 2.5rem;
         }
 
         /* --- RESPONSIVE DESIGN --- */
         @media (max-width: 768px) {
-            .two-columns {
-                flex-direction: column;
+            .hero-title-content h1 {
+                font-size: 2.5rem;
             }
-            .left-column {
-                order: 2;
-            }
-            .right-column {
-                order: 1;
+            .landing-container {
+                padding: 1rem;
             }
             #countdown-timer {
-                gap: 1rem;
+                gap: 0.5rem;
             }
             .countdown-item {
-                min-width: 60px;
-                padding: 0.8rem 1rem;
+                min-width: 70px;
+                padding: 0.8rem;
             }
             .countdown-item span {
-                font-size: 2rem;
+                font-size: 1.5rem;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- SECCIÓN HEADER CON COUNTDOWN -->
-    <header class="hero-countdown">
-        <div class="container">
-            <h1>¡La Magia Comienza En!</h1>
-            <div id="countdown-timer">
-                <div class="countdown-item"><span id="days">00</span>Días</div>
-                <div class="countdown-item"><span id="hours">00</span>Horas</div>
-                <div class="countdown-item"><span id="minutes">00</span>Minutos</div>
-                <div class="countdown-item"><span id="seconds">00</span>Segundos</div>
+    <div class="landing-container">
+        <!-- SECCIÓN DEL TÍTULO PRINCIPAL -->
+        <section class="hero-title-section">
+            <div class="hero-title-content">
+                <h1>QUIERO CONTRATAR Y RECIBIR MI REGALO</h1>
             </div>
+        </section>
+
+        <!-- SECCIÓN DEL COUNTDOWN -->
+        <div id="countdown-timer">
+            <div class="countdown-item"><span id="days">00</span><small>Días</small></div>
+            <div class="countdown-item"><span id="hours">00</span><small>Horas</small></div>
+            <div class="countdown-item"><span id="minutes">00</span><small>Minutos</small></div>
+            <div class="countdown-item"><span id="seconds">00</span><small>Segundos</small></div>
         </div>
-    </header>
 
-    <!-- SECCIÓN PRINCIPAL -->
-    <main class="main-content">
-        <div class="container">
-            <div class="two-columns">
-                <!-- COLUMNA IZQUIERDA -->
-                <div class="left-column">
-                    <img src="https://z-cdn-media.chatglm.cn/files/99132994-1bb8-4349-84e4-0232bd8b3431_1.jpg?auth_key=1790935980-0b5fb345ae31494e97d9e4d3d5bd9b0e-0-fe66fa0d591f980d36d958805786ab44" alt="Mago Axel Espectáculo">
-                </div>
+        <!-- SUBTÍTULO CON LA CONDICIÓN DE LA PROMO -->
+        <p class="promo-subtitle">Esta promo aplica para show que se realiza de lunes a jueves por todo el mes de octubre.</p>
 
-                <!-- COLUMNA DERECHA -->
-                <div class="right-column">
-                    <div class="feature-row">
-                        <!-- CAMBIO A EMOJI ILUSTRATIVO -->
-                        <div class="feature-emoji">🪄</div>
-                        <div>
-                            <h3>Magia y Animación</h3>
-                            <p>Un espectáculo interactivo donde los niños son los protagonistas de trucos sorprendentes y juegos llenos de energía.</p>
-                        </div>
-                    </div>
-                    <div class="feature-row">
-                        <!-- CAMBIO A EMOJI ILUSTRATIVO -->
-                        <div class="feature-emoji">🐥</div>
-                        <div>
-                            <h3>Tito Patito Puppet</h3>
-                            <p>Las risas están garantizadas con las aventuras y travesuras de nuestro puppet estrella, un personaje querido por todos.</p>
-                        </div>
-                    </div>
-                    <div class="feature-row">
-                        <!-- CAMBIO A EMOJI ILUSTRATIVO -->
-                        <div class="feature-emoji">🐕🎈</div>
-                        <div>
-                            <h3>Globoflexia y Cierre Genial</h3>
-                            <p>Cada niño se lleva un recuerdo mágico. Terminamos con un cierre espectacular, premios sorpresa y acompañamiento para cantar el cumpleaños feliz.</p>
-                        </div>
-                    </div>
-                </div>
+        <!-- FORMULARIO DE CONTACTO -->
+        <form id="contact-form" class="contact-form" action="https://formspree.io/f/xnngdywj" method="POST">
+            <div class="form-group">
+                <label for="name">Tu Nombre Completo</label>
+                <input type="text" id="name" name="name" required>
             </div>
-        </div>
-    </main>
-
-    <!-- FOOTER CON FORMULARIO COMPLETO -->
-    <footer class="footer-form">
-        <div class="container">
-            <h2>Reserva tu Fecha y Recibe un Regalo Mágico</h2>
-            <p>Completa el formulario y te contactaremos a la brevedad.</p>
+            <div class="form-group">
+                <label for="email">Tu Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Tu Teléfono / WhatsApp</label>
+                <input type="tel" id="phone" name="phone" required>
+            </div>
+            <div class="form-group">
+                <label for="city">Ciudad del Evento</label>
+                <select id="city" name="city" required>
+                    <option value="" disabled selected>Selecciona tu ciudad...</option>
+                    <option value="Asunción">Asunción</option>
+                    <option value="Luque">Luque</option>
+                    <option value="San Lorenzo">San Lorenzo</option>
+                    <option value="Lambaré">Lambaré</option>
+                    <option value="Capiatá">Capiatá</option>
+                    <option value="Itauguá">Itauguá</option>
+                    <option value="Ñemby">Ñemby</option>
+                    <option value="Limpio">Limpio</option>
+                    <option value="Mariano Roque Alonso">Mariano Roque Alonso</option>
+                    <option value="Villa Elisa">Villa Elisa</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="date">Fecha del Evento (Aproximada)</label>
+                <input type="date" id="date" name="date" required>
+            </div>
+            <div class="form-group">
+                <label for="gift_promo">Elige tu Regalo Promocional</label>
+                <select id="gift_promo" name="gift_promo" required>
+                    <option value="" disabled selected>Elige tu regalo gratis...</option>
+                    <option value="1 Hora de Globoloco">1 Hora de Globoloco</option>
+                    <option value="1 Hora de Pororó">1 Hora de Pororó</option>
+                    <option value="1 Hora de Algodón de Azúcar">1 Hora de Algodón de Azúcar</option>
+                </select>
+            </div>
             
-            <!-- IMPORTANTE: Reemplaza "TU_FORM_ID" con el ID que te dio Formspree -->
-            <form id="contact-form" class="contact-form" action="https://formspree.io/f/xnngdywj" method="POST">
-                <div class="form-group">
-                    <label for="name">Tu Nombre Completo</label>
-                    <input type="text" id="name" name="name" required>
+            <!-- CAMPO CAPTCHA -->
+            <div class="form-group">
+                <label>Verificación Anti-Spam</label>
+                <div class="captcha-container">
+                    <p>¿Cuánto es <span id="num1"></span> + <span id="num2"></span>?</p>
+                    <input type="number" id="captcha-answer" placeholder="Respuesta" required>
+                    <input type="hidden" id="captcha-result" name="captcha_answer">
                 </div>
-                <div class="form-group">
-                    <label for="email">Tu Email</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="phone">Tu Teléfono / WhatsApp</label>
-                    <input type="tel" id="phone" name="phone" required>
-                </div>
-                <div class="form-group">
-                    <label for="city">Ciudad del Evento</label>
-                    <select id="city" name="city" required>
-                        <option value="" disabled selected>Selecciona tu ciudad...</option>
-                        <option value="Asunción">Asunción</option>
-                        <option value="Luque">Luque</option>
-                        <option value="San Lorenzo">San Lorenzo</option>
-                        <option value="Lambaré">Lambaré</option>
-                        <option value="Capiatá">Capiatá</option>
-                        <option value="Itauguá">Itauguá</option>
-                        <option value="Ñemby">Ñemby</option>
-                        <option value="Limpio">Limpio</option>
-                        <option value="Mariano Roque Alonso">Mariano Roque Alonso</option>
-                        <option value="Villa Elisa">Villa Elisa</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="date">Fecha del Evento (Aproximada)</label>
-                    <input type="date" id="date" name="date" required>
-                </div>
-                <div class="form-group">
-                    <label for="gift_promo">Elige tu Regalo Promocional</label>
-                    <select id="gift_promo" name="gift_promo" required>
-                        <option value="" disabled selected>Elige tu regalo gratis...</option>
-                        <option value="1 Hora de Globoloco">1 Hora de Globoloco</option>
-                        <option value="1 Hora de Pororó">1 Hora de Pororó</option>
-                        <option value="1 Hora de Algodón de Azúcar">1 Hora de Algodón de Azúcar</option>
-                    </select>
-                </div>
-                
-                <!-- CAMPO CAPTCHA -->
-                <div class="form-group">
-                    <label>Verificación Anti-Spam</label>
-                    <div class="captcha-container">
-                        <p>¿Cuánto es <span id="num1"></span> + <span id="num2"></span>?</p>
-                        <input type="number" id="captcha-answer" placeholder="Respuesta" required>
-                        <input type="hidden" id="captcha-result" name="captcha_answer">
-                    </div>
-                </div>
+            </div>
+        </form>
 
-                <button type="submit" class="btn-submit">QUIERO RECIBIR MI OFERTA</button>
-            </form>
-        </div>
-    </footer>
+        <!-- LLAMADA A LA ACCIÓN FINAL -->
+        <button id="final-cta-button" class="btn-final-cta">QUIERO CONTRATAR Y RECIBIR MI REGALO</button>
+    </div>
 
+    <!-- SCRIPT PARA EL COUNTDOWN Y EL FORMULARIO -->
     <script>
-document.addEventListener('DOMContentLoaded', function() {
-    
-    // --- CONFIGURACIÓN DEL COUNTDOWN ---
-    // CAMBIA ESTA FECHA POR LA FECHA DE TU EVENTO O LÍMITE DE OFERTA
-    const targetDate = new Date("2024-12-31T23:59:59").getTime(); 
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // --- CONFIGURACIÓN DEL COUNTDOWN ---
+            // CAMBIA ESTA FECHA POR EL FIN DE TU PROMOCIÓN (31 de Octubre a las 23:59)
+            const targetDate = new Date("2025-10-31T23:59:59").getTime(); 
 
-    const countdownInterval = setInterval(function() {
-        const now = new Date().getTime();
-        const distance = targetDate - now;
+            const countdownInterval = setInterval(function() {
+                const now = new Date().getTime();
+                const distance = targetDate - now;
 
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        document.getElementById("days").innerText = days.toString().padStart(2, '0');
-        document.getElementById("hours").innerText = hours.toString().padStart(2, '0');
-        document.getElementById("minutes").innerText = minutes.toString().padStart(2, '0');
-        document.getElementById("seconds").innerText = seconds.toString().padStart(2, '0');
+                document.getElementById("days").innerText = days.toString().padStart(2, '0');
+                document.getElementById("hours").innerText = hours.toString().padStart(2, '0');
+                document.getElementById("minutes").innerText = minutes.toString().padStart(2, '0');
+                document.getElementById("seconds").innerText = seconds.toString().padStart(2, '0');
 
-        if (distance < 0) {
-            clearInterval(countdownInterval);
-            document.getElementById("countdown-timer").innerHTML = "¡La oferta ha finalizado!";
-        }
-    }, 1000);
+                if (distance < 0) {
+                    clearInterval(countdownInterval);
+                    document.getElementById("countdown-timer").innerHTML = "<p>¡La oferta ha finalizado!</p>";
+                }
+            }, 1000);
 
+            // --- SCRIPT DEL FORMULARIO Y BOTÓN CTA ---
+            const contactForm = document.getElementById('contact-form');
+            const finalCtaButton = document.getElementById('final-cta-button');
+            const num1El = document.getElementById('num1');
+            const num2El = document.getElementById('num2');
+            const captchaResultEl = document.getElementById('captcha-result');
+            const captchaAnswerEl = document.getElementById('captcha-answer');
 
-    // --- SCRIPT DEL FORMULARIO (CORREGIDO) ---
-    const contactForm = document.getElementById('contact-form');
-    const num1El = document.getElementById('num1');
-    const num2El = document.getElementById('num2');
-    const captchaResultEl = document.getElementById('captcha-result');
-    const captchaAnswerEl = document.getElementById('captcha-answer');
-
-    function generateCaptcha() {
-        const num1 = Math.floor(Math.random() * 10) + 1;
-        const num2 = Math.floor(Math.random() * 10) + 1;
-        num1El.textContent = num1;
-        num2El.textContent = num2;
-        captchaResultEl.value = num1 + num2;
-    }
-    
-    generateCaptcha();
-
-    contactForm.addEventListener('submit', function(e) {
-        // --- VERIFICACIÓN DEL CAPTCHA ANTES DE ENVIAR ---
-        const userAnswer = parseInt(captchaAnswerEl.value, 10);
-        const correctAnswer = parseInt(captchaResultEl.value, 10);
-
-        if (isNaN(userAnswer) || userAnswer !== correctAnswer) {
-            // SI EL CAPTCHA ES INCORRECTO, DETENEMOS EL ENVÍO
-            e.preventDefault(); 
-            alert('La respuesta de la verificación es incorrecta. Por favor, inténtalo de nuevo.');
+            function generateCaptcha() {
+                const num1 = Math.floor(Math.random() * 10) + 1;
+                const num2 = Math.floor(Math.random() * 10) + 1;
+                num1El.textContent = num1;
+                num2El.textContent = num2;
+                captchaResultEl.value = num1 + num2;
+            }
+            
             generateCaptcha();
-            captchaAnswerEl.value = '';
-            captchaAnswerEl.focus();
-            return; // Detenemos la ejecución aquí
-        }
 
-        // SI EL CAPTCHA ES CORRECTO, NO HACEMOS NADA.
-        // El formulario se enviará de forma normal y el navegador te llevará a la página de agradecimiento de Formspree.
-    });
-});
-</script>
+            // Función para validar y enviar el formulario
+            function validateAndSubmitForm() {
+                const userAnswer = parseInt(captchaAnswerEl.value, 10);
+                const correctAnswer = parseInt(captchaResultEl.value, 10);
+
+                if (isNaN(userAnswer) || userAnswer !== correctAnswer) {
+                    alert('La respuesta de la verificación es incorrecta. Por favor, inténtalo de nuevo.');
+                    generateCaptcha();
+                    captchaAnswerEl.value = '';
+                    captchaAnswerEl.focus();
+                    return;
+                }
+
+                // Si el CAPTCHA es correcto, envía el formulario
+                contactForm.requestSubmit();
+            }
+
+            // Añadir el evento al botón CTA final
+            finalCtaButton.addEventListener('click', validateAndSubmitForm);
+        });
+    </script>
 </body>
 </html>
-
-
-
-
